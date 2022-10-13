@@ -8,5 +8,6 @@ Description: More about what it does (maybe more than one line)
 License: GPL-3
 Imports: Rcpp (>= 1.0.9), rgl, Rvcg
 LinkingTo: Rcpp, RcppEigen, RcppCGAL, BH
+Suggests: uniformly
 Encoding: UTF-8
 RoxygenNote: 7.2.1
