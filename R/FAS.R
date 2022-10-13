@@ -24,7 +24,7 @@ NULL
 #' pts <- runif_in_torus(5000L, R = 3, r = 1)
 #' ahull <- ahull3d(pts, alpha = 2)
 #' 
-#' open3d(windowRect = c(50, 50, 512, 512))
+#' open3d(windowRect = c(50, 50, 562, 562))
 #' points3d(pts)
 #' shade3d(ahull, color = "orange", alpha = 0.4)
 ahull3d <- function(points, alpha) {
