@@ -3,8 +3,8 @@
 NULL
 
 
-#' 3D alpha-hull
-#' @description Computes the alpha-hull of a set of points.
+#' 3D alpha hull
+#' @description Computes the alpha hull of a set of points.
 #'
 #' @param points the points given as a matrix with three columns
 #' @param alpha positive number

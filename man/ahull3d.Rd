@@ -2,7 +2,7 @@
 % Please edit documentation in R/FAS.R
 \name{ahull3d}
 \alias{ahull3d}
-\title{3D alpha-hull}
+\title{3D alpha hull}
 \usage{
 ahull3d(points, alpha)
 }
@@ -15,7 +15,7 @@ ahull3d(points, alpha)
 A \code{mesh3d} object.
 }
 \description{
-Computes the alpha-hull of a set of points.
+Computes the alpha hull of a set of points.
 }
 \examples{
 library(AlphaHull3D)

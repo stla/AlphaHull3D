@@ -1,13 +1,26 @@
-Package: AlphaHull3D
 Type: Package
-Title: What the package does (short line)
+Package: AlphaHull3D
+Title: Alpha Hull Computation
 Version: 0.9000
 Author: Stéphane Laurent
 Maintainer: Stéphane Laurent <laurent_step@outlook.fr>
-Description: More about what it does (maybe more than one line)
+Description: Computation of the alpha hull of a set of points in the 3D
+    space, that is to say "something like the shape formed by these
+    points". The alpha hull depends on a positive parameter alpha. When
+    alpha goes to zero, the alpha hull degenerates to the set of points,
+    while it is the convex hull of the set of points when alpha goes to
+    infinity.
 License: GPL-3
-Imports: Rcpp (>= 1.0.9), rgl, Rvcg
-LinkingTo: Rcpp, RcppEigen, RcppCGAL, BH
-Suggests: uniformly
+Imports: 
+    Rcpp (>= 1.0.9),
+    rgl,
+    Rvcg
+Suggests: 
+    uniformly
+LinkingTo: 
+    BH,
+    Rcpp,
+    RcppCGAL,
+    RcppEigen
 Encoding: UTF-8
 RoxygenNote: 7.2.1
