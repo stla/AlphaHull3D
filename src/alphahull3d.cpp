@@ -15,6 +15,8 @@ Rcpp::NumericMatrix FAS_cpp(Rcpp::NumericMatrix pts, double alpha) {
   std::list<Facet> facets;
   as.get_alpha_shape_facets(std::back_inserter(facets),
                             Fixed_alpha_shape_3::REGULAR);
+  as.get_alpha_shape_facets(std::back_inserter(facets),
+                            Fixed_alpha_shape_3::SINGULAR);
   const int nfacets = facets.size();
   // output - facet indices are 3i, 3i+1, 3i+2
   Rcpp::NumericMatrix Vertices(3, 3 * nfacets);
