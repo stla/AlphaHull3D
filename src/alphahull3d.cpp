@@ -1,7 +1,7 @@
 #include "alphahull3d.h"
 
 // [[Rcpp::export]]
-Rcpp::NumericMatrix FAS_cpp(Rcpp::NumericMatrix pts, double alpha) {
+Rcpp::NumericMatrix FAS_cpp(Rcpp::NumericMatrix pts, double alpha, bool volume) {
   // make list of points
   const int npoints = pts.ncol();
   std::list<Point3> points;
@@ -47,6 +47,27 @@ Rcpp::NumericMatrix FAS_cpp(Rcpp::NumericMatrix pts, double alpha) {
     Vertices(Rcpp::_, 3*i+1) = V2;
     Vertices(Rcpp::_, 3*i+2) = V3;
     i++;
+  }
+  // volume of the tetrahedra
+  if(volume) {
+    double vol = 0.0;
+    std::list<Cell_handle> cells;
+    as.get_alpha_shape_cells(std::back_inserter(cells),
+                             Fixed_alpha_shape_3::EXTERIOR);
+    as.get_alpha_shape_cells(std::back_inserter(cells),
+                             Fixed_alpha_shape_3::INTERIOR);
+    std::list<Cell_handle>::iterator it_cell;
+    for(it_cell = cells.begin(); it_cell != cells.end(); it_cell++) {
+      Cell_handle cell = *it_cell;
+      Tetrahedron t(
+          cell->vertex(0)->point(),
+          cell->vertex(1)->point(),
+          cell->vertex(2)->point(),
+          cell->vertex(3)->point()
+      );
+      vol += fabs(t.volume());
+    }
+    Vertices.attr("volume") = vol;
   }
   return Vertices;
 }

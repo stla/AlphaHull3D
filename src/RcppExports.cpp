@@ -12,20 +12,21 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // FAS_cpp
-Rcpp::NumericMatrix FAS_cpp(Rcpp::NumericMatrix pts, double alpha);
-RcppExport SEXP _AlphaHull3D_FAS_cpp(SEXP ptsSEXP, SEXP alphaSEXP) {
+Rcpp::NumericMatrix FAS_cpp(Rcpp::NumericMatrix pts, double alpha, bool volume);
+RcppExport SEXP _AlphaHull3D_FAS_cpp(SEXP ptsSEXP, SEXP alphaSEXP, SEXP volumeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type pts(ptsSEXP);
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    rcpp_result_gen = Rcpp::wrap(FAS_cpp(pts, alpha));
+    Rcpp::traits::input_parameter< bool >::type volume(volumeSEXP);
+    rcpp_result_gen = Rcpp::wrap(FAS_cpp(pts, alpha, volume));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_AlphaHull3D_FAS_cpp", (DL_FUNC) &_AlphaHull3D_FAS_cpp, 2},
+    {"_AlphaHull3D_FAS_cpp", (DL_FUNC) &_AlphaHull3D_FAS_cpp, 3},
     {NULL, NULL, 0}
 };
 

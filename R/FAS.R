@@ -8,8 +8,11 @@ NULL
 #'
 #' @param points the points given as a matrix with three columns
 #' @param alpha positive number
+#' @param volume Boolean, whether to return the volume of the alpha hull, 
+#'   \strong{but this is not always reliable}
 #'
-#' @return A \code{mesh3d} object.
+#' @return A \code{mesh3d} object, with an attribute \code{"volume"} if 
+#'   \code{volume = TRUE}.
 #' @export
 #' 
 #' @importFrom rgl tmesh3d
@@ -27,11 +30,11 @@ NULL
 #' open3d(windowRect = c(50, 50, 562, 562))
 #' points3d(pts)
 #' shade3d(ahull, color = "orange", alpha = 0.4)
-ahull3d <- function(points, alpha) {
+ahull3d <- function(points, alpha, volume = FALSE) {
   stopifnot(is.matrix(points))
   stopifnot(ncol(points) == 3L)
   stopifnot(alpha >= 0)
-  vertices  <- FAS_cpp(t(points), alpha)
+  vertices  <- FAS_cpp(t(points), alpha, volume)
   nvertices <- ncol(vertices)
   if(nvertices == 0L) {
     message("The alpha-shape is empty.")
@@ -45,5 +48,8 @@ ahull3d <- function(points, alpha) {
   mesh <- vcgClean(mesh0, sel = c(0L, 7L), silent = TRUE)
   mesh[["remvert"]] <- NULL
   mesh[["remface"]] <- NULL
+  if(volume) {
+    attr(mesh, "volume") <- attr(vertices, "volume")
+  }
   mesh
 }

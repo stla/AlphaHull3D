@@ -4,15 +4,19 @@
 \alias{ahull3d}
 \title{3D alpha hull}
 \usage{
-ahull3d(points, alpha)
+ahull3d(points, alpha, volume = FALSE)
 }
 \arguments{
 \item{points}{the points given as a matrix with three columns}
 
 \item{alpha}{positive number}
+
+\item{volume}{Boolean, whether to return the volume of the alpha hull, 
+\strong{but this is not always reliable}}
 }
 \value{
-A \code{mesh3d} object.
+A \code{mesh3d} object, with an attribute \code{"volume"} if 
+  \code{volume = TRUE}.
 }
 \description{
 Computes the alpha hull of a set of points.
