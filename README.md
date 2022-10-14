@@ -15,3 +15,9 @@
 - Great stellated dodecahedron from its vertices:
 
 ![](https://raw.githubusercontent.com/stla/AlphaHull3D/main/inst/gifs/greatStellatedDodecahedron.gif)
+
+- Alpha hull of the stereographic projections of the vertices of the
+[gircope](https://laustep.github.io/stlahblog/posts/HyperbolicGircope.html),
+`alpha=0.2`:
+
+![](https://raw.githubusercontent.com/stla/AlphaHull3D/main/inst/gifs/gircope.gif)
