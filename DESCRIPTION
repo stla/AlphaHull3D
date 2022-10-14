@@ -1,7 +1,7 @@
 Type: Package
 Package: AlphaHull3D
 Title: Alpha Hull Computation
-Version: 0.9000
+Version: 1.0.0
 Author: Stéphane Laurent
 Maintainer: Stéphane Laurent <laurent_step@outlook.fr>
 Description: Computation of the alpha hull of a set of points in the 3D
