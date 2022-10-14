@@ -11,3 +11,7 @@
 - Pentagrammic prism from its vertices:
 
 ![](https://raw.githubusercontent.com/stla/AlphaHull3D/main/inst/gifs/pentagrammicPrism.gif)
+
+- Great stellated dodecahedron from its vertices:
+
+![](https://raw.githubusercontent.com/stla/AlphaHull3D/main/inst/gifs/greatStellatedDodecahedron.gif)
