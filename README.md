@@ -21,3 +21,11 @@
 `alpha=0.2`:
 
 ![](https://raw.githubusercontent.com/stla/AlphaHull3D/main/inst/gifs/gircope.gif)
+
+
+## License
+
+This package is provided under the GPL-3 license but it uses the C++ library 
+CGAL. If you wish to use CGAL for commercial purposes, you must obtain a license
+from the [GeometryFactory](https://geometryfactory.com).
+
