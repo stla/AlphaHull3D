@@ -24,3 +24,6 @@ LinkingTo:
     RcppEigen
 Encoding: UTF-8
 RoxygenNote: 7.2.1
+URL: https://github.com/stla/AlphaHull3D
+BugReports: https://github.com/stla/AlphaHull3D/issues
+SystemRequirements: C++ 14, gmp, mpfr
