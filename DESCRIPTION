@@ -9,7 +9,7 @@ Description: Computation of the alpha hull of a set of points in the 3D
     points". The alpha hull depends on a positive parameter alpha. When
     alpha goes to zero, the alpha hull degenerates to the set of points,
     while it is the convex hull of the set of points when alpha goes to
-    infinity.
+    infinity. Computations are performed by the 'CGAL' C++ library.
 License: GPL-3
 Imports: 
     Rcpp (>= 1.0.9),

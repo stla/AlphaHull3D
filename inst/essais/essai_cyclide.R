@@ -5,7 +5,7 @@ library(MeshesOperations)
 mesh <- cyclideMesh(a = 97, c = 32, mu = 57)
 pts <- sampleOnMesh(2000, mesh)
 
-ahull <- ahull3d(pts, alpha = 50)
+ahull <- ahull3d(pts, alpha = 200)
 #ahull$normals <- NULL
 open3d(windowRect = c(50, 50, 512, 512), zoom = 0.85)
 #points3d(pts)
