@@ -2,7 +2,7 @@ Type: Package
 Package: AlphaHull3D
 Title: Alpha Hull Computation
 Version: 1.0.0
-Author: Stéphane Laurent
+Authors@R: person("Stéphane", "Laurent", email = "laurent_step@outlook.fr", role = c("aut", "cre"))
 Maintainer: Stéphane Laurent <laurent_step@outlook.fr>
 Description: Computation of the alpha hull of a set of points in the 3D
     space, that is to say "something like the shape formed by these
