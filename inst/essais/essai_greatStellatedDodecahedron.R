@@ -38,7 +38,7 @@ pts <-
 library(AlphaHull3D)
 library(rgl)
 
-ahull <- ahull3d(pts, alpha = 1.5)
+ahull <- ahull3d(pts, alpha = 1.5, volume = TRUE)
 ahull$normals <- NULL
 
 open3d(windowRect = c(50, 50, 562, 562), zoom = 0.7)

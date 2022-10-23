@@ -50,24 +50,40 @@ Rcpp::NumericMatrix FAS_cpp(Rcpp::NumericMatrix pts, double alpha, bool volume) 
   }
   // volume of the tetrahedra
   if(volume) {
-    double vol = 0.0;
-    std::list<Cell_handle> cells;
-    as.get_alpha_shape_cells(std::back_inserter(cells),
+    double vol1 = 0.0;
+    double vol2 = 0.0;
+    std::list<Cell_handle> cells1;
+    std::list<Cell_handle> cells2;
+    as.get_alpha_shape_cells(std::back_inserter(cells1),
                              Fixed_alpha_shape_3::EXTERIOR);
-    as.get_alpha_shape_cells(std::back_inserter(cells),
+    as.get_alpha_shape_cells(std::back_inserter(cells2),
                              Fixed_alpha_shape_3::INTERIOR);
-    std::list<Cell_handle>::iterator it_cell;
-    for(it_cell = cells.begin(); it_cell != cells.end(); it_cell++) {
-      Cell_handle cell = *it_cell;
+    std::list<Cell_handle>::iterator it_cell1;
+    for(it_cell1 = cells1.begin(); it_cell1 != cells1.end(); it_cell1++) {
+      Cell_handle cell = *it_cell1;
       Tetrahedron t(
           cell->vertex(0)->point(),
           cell->vertex(1)->point(),
           cell->vertex(2)->point(),
           cell->vertex(3)->point()
       );
-      vol += fabs(t.volume());
+      vol1 += fabs(t.volume());
     }
-    Vertices.attr("volume") = vol;
+    std::list<Cell_handle>::iterator it_cell2;
+    for(it_cell2 = cells2.begin(); it_cell2 != cells2.end(); it_cell2++) {
+      Cell_handle cell = *it_cell2;
+      Tetrahedron t(
+          cell->vertex(0)->point(),
+          cell->vertex(1)->point(),
+          cell->vertex(2)->point(),
+          cell->vertex(3)->point()
+      );
+      vol2 += fabs(t.volume());
+    }
+    Vertices.attr("volume") = Rcpp::NumericVector::create(
+      Rcpp::Named("exterior") = vol1,
+      Rcpp::Named("interior") = vol2
+    );
   }
   return Vertices;
 }
