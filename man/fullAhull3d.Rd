@@ -18,8 +18,9 @@ Computes the complete alpha hull of a set of points. The result
 }
 \examples{
 library(AlphaHull3D)
-ahull <- fullAhull3d(greatStellatedDodecahedron)
+ahull <- fullAhull3d(gissid)
 mesh <- setAlpha(ahull, alpha = "solid")
+mesh$normals <- NULL
 library(rgl)
 open3d(windowRect = c(50, 50, 562, 562))
 shade3d(mesh, color = "purple")

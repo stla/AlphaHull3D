@@ -28,7 +28,7 @@ Given a full alpha hull, this function allows to set the
 }
 \examples{
 library(AlphaHull3D)
-ahull <- fullAhull3d(greatStellatedDodecahedron)
+ahull <- fullAhull3d(gissid)
 mesh <- setAlpha(ahull, alpha = optimal(1))
 mesh$normals <- NULL
 library(rgl)

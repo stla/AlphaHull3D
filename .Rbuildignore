@@ -5,3 +5,4 @@
 ^cran-comments\.md$
 ^inst/essais$
 ^CRAN-SUBMISSION$
+^data-raw$
