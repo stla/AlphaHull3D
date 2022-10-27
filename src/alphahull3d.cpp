@@ -104,13 +104,19 @@ Rcpp::XPtr<Alpha_shape_3> AS_cpp(Rcpp::NumericMatrix pts) {
   return as_xptr;
 }
 
+void Message(std::string msg) {
+  SEXP rmsg = Rcpp::wrap(msg);
+  Rcpp::message(rmsg);
+}
+
 // [[Rcpp::export]]
 Rcpp::NumericMatrix optimalAS_cpp(Rcpp::XPtr<Alpha_shape_3> as_xptr, int nc) {
   Alpha_shape_3& as = *(as_xptr.get());
   Alpha_iterator opt = as.find_optimal_alpha(nc);
   const double alpha = *opt;
+  const std::string msg = "Optimal alpha: " + std::to_string(alpha) + ".\n";
+  Message(msg);
   as.set_alpha(alpha);
-  Rcpp::Rcout << alpha;
   // get the facets
   std::list<Alpha_shape_3::Facet> facets;
   as.get_alpha_shape_facets(std::back_inserter(facets),
@@ -156,8 +162,9 @@ Rcpp::NumericMatrix optimalAS_cpp(Rcpp::XPtr<Alpha_shape_3> as_xptr, int nc) {
 Rcpp::NumericMatrix solidAS_cpp(Rcpp::XPtr<Alpha_shape_3> as_xptr) {
   Alpha_shape_3& as = *(as_xptr.get());
   const double alpha = as.find_alpha_solid();
+  const std::string msg = "Alpha: " + std::to_string(alpha) + ".\n";
+  Message(msg);
   as.set_alpha(alpha);
-  Rcpp::Rcout << alpha;
   // get the facets
   std::list<Alpha_shape_3::Facet> facets;
   as.get_alpha_shape_facets(std::back_inserter(facets),
