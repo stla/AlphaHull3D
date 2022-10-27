@@ -5,3 +5,11 @@ FAS_cpp <- function(pts, alpha, volume) {
     .Call(`_AlphaHull3D_FAS_cpp`, pts, alpha, volume)
 }
 
+AS_cpp <- function(pts) {
+    .Call(`_AlphaHull3D_AS_cpp`, pts)
+}
+
+optimalAlpha_cpp <- function(as_xptr, nc) {
+    invisible(.Call(`_AlphaHull3D_optimalAlpha_cpp`, as_xptr, nc))
+}
+

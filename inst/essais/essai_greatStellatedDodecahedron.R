@@ -35,10 +35,17 @@ pts <-
     c(-1/sqrt(15), -1/sqrt(5), -(3/sqrt(5)-1)/sqrt(3)/2)
   )
 
+pts <- t(rgl::cube3d()$vb[-4, ])
+data(greatStellatedDodecahedron, package = "MeshesTools")
+pts <- greatStellatedDodecahedron$vertices
+as <- AlphaHull3D:::AS_cpp(t(pts))
+AlphaHull3D:::optimalAlpha_cpp(as, 1L)
+
+
 library(AlphaHull3D)
 library(rgl)
 
-ahull <- ahull3d(pts, alpha = 1.5, volume = TRUE)
+ahull <- ahull3d(pts, alpha = 1.1459, volume = TRUE)
 ahull$normals <- NULL
 
 open3d(windowRect = c(50, 50, 562, 562), zoom = 0.7)

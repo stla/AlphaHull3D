@@ -1,4 +1,4 @@
-#include "alphahull3d.h"
+#include "AlphaHull3D_types.h"
 
 // [[Rcpp::export]]
 Rcpp::NumericMatrix FAS_cpp(Rcpp::NumericMatrix pts, double alpha, bool volume) {
@@ -86,4 +86,27 @@ Rcpp::NumericMatrix FAS_cpp(Rcpp::NumericMatrix pts, double alpha, bool volume) 
     );
   }
   return Vertices;
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<Alpha_shape_3> AS_cpp(Rcpp::NumericMatrix pts) {
+  // make list of points
+  const int npoints = pts.ncol();
+  std::list<Point3> points;
+  for(int i = 0; i < npoints; i++) {
+    const Rcpp::NumericVector pt_i = pts(Rcpp::_, i);
+    points.push_back(Point3(pt_i(0), pt_i(1), pt_i(2)));
+  }
+  // compute alpha shape in a pointer
+  Alpha_shape_3* as_ptr = new Alpha_shape_3(points.begin(), points.end());
+  // make Rcpp pointer
+  Rcpp::XPtr<Alpha_shape_3> as_xptr(as_ptr, false);
+  return as_xptr;
+}
+
+// [[Rcpp::export]]
+void optimalAlpha_cpp(Rcpp::XPtr<Alpha_shape_3> as_xptr, int nc) {
+  Alpha_shape_3& as = *(as_xptr.get());
+  Alpha_iterator opt = as.find_optimal_alpha(1);
+  Rcpp::Rcout << *opt;
 }
