@@ -22,6 +22,7 @@ xx
 library(AlphaHull3D)
 ahull <- fullAhull3d(greatStellatedDodecahedron)
 mesh <- setAlpha(ahull, alpha = optimal(1))
+mesh$normals <- NULL
 library(rgl)
 open3d(windowRect = c(50, 50, 562, 562))
 shade3d(mesh, color = "maroon")
