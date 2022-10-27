@@ -105,8 +105,49 @@ Rcpp::XPtr<Alpha_shape_3> AS_cpp(Rcpp::NumericMatrix pts) {
 }
 
 // [[Rcpp::export]]
-void optimalAlpha_cpp(Rcpp::XPtr<Alpha_shape_3> as_xptr, int nc) {
+Rcpp::NumericMatrix optimalAS_cpp(Rcpp::XPtr<Alpha_shape_3> as_xptr, int nc) {
   Alpha_shape_3& as = *(as_xptr.get());
-  Alpha_iterator opt = as.find_optimal_alpha(1);
-  Rcpp::Rcout << *opt;
+  Alpha_iterator opt = as.find_optimal_alpha(nc);
+  const double alpha = *opt;
+  as.set_alpha(alpha);
+  Rcpp::Rcout << alpha;
+  // get the facets
+  std::list<Alpha_shape_3::Facet> facets;
+  as.get_alpha_shape_facets(std::back_inserter(facets),
+                            Alpha_shape_3::REGULAR);
+  as.get_alpha_shape_facets(std::back_inserter(facets),
+                            Alpha_shape_3::SINGULAR);
+  const int nfacets = facets.size();
+  // output - facet indices are 3i, 3i+1, 3i+2
+  Rcpp::NumericMatrix Vertices(3, 3 * nfacets);
+  std::list<Alpha_shape_3::Facet>::iterator it_facet;
+  int i = 0;
+  for(it_facet = facets.begin(); it_facet != facets.end(); it_facet++) {
+    Alpha_shape_3::Facet facet = *it_facet;
+    // to have a consistent orientation, always consider an exterior cell
+    if(as.classify(facet.first) != Alpha_shape_3::EXTERIOR) {
+      facet = as.mirror_facet(facet);
+    }
+    int indices[3] = {
+      (facet.second + 1) % 4,
+      (facet.second + 2) % 4,
+      (facet.second + 3) % 4,
+    };
+    // needed to get a consistent orientation
+    if(facet.second % 2 == 0 ){
+      std::swap(indices[0], indices[1]);
+    }
+    const Point3 v1 = facet.first->vertex(indices[0])->point();
+    const Point3 v2 = facet.first->vertex(indices[1])->point();
+    const Point3 v3 = facet.first->vertex(indices[2])->point();
+    const Rcpp::NumericVector V1 = {v1.x(), v1.y(), v1.z()};
+    const Rcpp::NumericVector V2 = {v2.x(), v2.y(), v2.z()};
+    const Rcpp::NumericVector V3 = {v3.x(), v3.y(), v3.z()};
+    Vertices(Rcpp::_, 3*i)   = V1;
+    Vertices(Rcpp::_, 3*i+1) = V2;
+    Vertices(Rcpp::_, 3*i+2) = V3;
+    i++;
+  }
+  Vertices.attr("alpha") = alpha;
+  return Vertices;
 }

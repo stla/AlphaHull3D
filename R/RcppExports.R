@@ -9,7 +9,7 @@ AS_cpp <- function(pts) {
     .Call(`_AlphaHull3D_AS_cpp`, pts)
 }
 
-optimalAlpha_cpp <- function(as_xptr, nc) {
-    invisible(.Call(`_AlphaHull3D_optimalAlpha_cpp`, as_xptr, nc))
+optimalAS_cpp <- function(as_xptr, nc) {
+    .Call(`_AlphaHull3D_optimalAS_cpp`, as_xptr, nc)
 }
 

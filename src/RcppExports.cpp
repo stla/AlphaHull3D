@@ -36,22 +36,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// optimalAlpha_cpp
-void optimalAlpha_cpp(Rcpp::XPtr<Alpha_shape_3> as_xptr, int nc);
-RcppExport SEXP _AlphaHull3D_optimalAlpha_cpp(SEXP as_xptrSEXP, SEXP ncSEXP) {
+// optimalAS_cpp
+Rcpp::NumericMatrix optimalAS_cpp(Rcpp::XPtr<Alpha_shape_3> as_xptr, int nc);
+RcppExport SEXP _AlphaHull3D_optimalAS_cpp(SEXP as_xptrSEXP, SEXP ncSEXP) {
 BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<Alpha_shape_3> >::type as_xptr(as_xptrSEXP);
     Rcpp::traits::input_parameter< int >::type nc(ncSEXP);
-    optimalAlpha_cpp(as_xptr, nc);
-    return R_NilValue;
+    rcpp_result_gen = Rcpp::wrap(optimalAS_cpp(as_xptr, nc));
+    return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_AlphaHull3D_FAS_cpp", (DL_FUNC) &_AlphaHull3D_FAS_cpp, 3},
     {"_AlphaHull3D_AS_cpp", (DL_FUNC) &_AlphaHull3D_AS_cpp, 1},
-    {"_AlphaHull3D_optimalAlpha_cpp", (DL_FUNC) &_AlphaHull3D_optimalAlpha_cpp, 2},
+    {"_AlphaHull3D_optimalAS_cpp", (DL_FUNC) &_AlphaHull3D_optimalAS_cpp, 2},
     {NULL, NULL, 0}
 };
 
