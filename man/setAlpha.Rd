@@ -9,14 +9,22 @@ setAlpha(ahull, alpha = "solid")
 \arguments{
 \item{ahull}{a full alpha hull, i.e. an output of \code{\link{fullAhull3d}}}
 
-\item{alpha}{this xxx}
+\item{alpha}{there are three possibilities for this parameter: it can be 
+a positive number, or the character string \code{"solid"} to get and set 
+the smallest alpha for which the alpha hull is solid, or a positive 
+integer obtained with the \code{\link{optimal}} function to get and set 
+the optimal alpha for which the alpha hull has no more than a desired 
+number of connected components}
 }
 \value{
 A \strong{rgl} mesh (class \code{mesh3d}) with the value of 
   alpha in the \code{"alpha"} attribute.
 }
 \description{
-xx
+Given a full alpha hull, this function allows to set the 
+  value of alpha, either an arbitrary positive number, or an optimal value 
+  for a desired number of connected components, or a value for which the 
+  alpha hull is solid.
 }
 \examples{
 library(AlphaHull3D)
@@ -26,4 +34,7 @@ mesh$normals <- NULL
 library(rgl)
 open3d(windowRect = c(50, 50, 562, 562))
 shade3d(mesh, color = "maroon")
+}
+\seealso{
+\code{\link{fullAhull3d}}, \code{\link{optimal}}.
 }

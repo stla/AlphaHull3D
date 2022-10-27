@@ -17,7 +17,9 @@
 fullAhull3d <- function(points) {
   stopifnot(is.matrix(points))
   stopifnot(ncol(points) == 3L)
-  AS_cpp(t(points))
+  ahull <- AS_cpp(t(points))
+  class(ahull) <- "ahull"
+  ahull
 }
 
 #' @title Integer for the computation of an optimal alpha
@@ -58,14 +60,24 @@ optimal <- function(n) {
 }
 
 #' @title Set alpha value to a full alpha hull and computes this alpha hull
-#' @description xx
+#' @description Given a full alpha hull, this function allows to set the 
+#'   value of alpha, either an arbitrary positive number, or an optimal value 
+#'   for a desired number of connected components, or a value for which the 
+#'   alpha hull is solid. 
 #'
 #' @param ahull a full alpha hull, i.e. an output of \code{\link{fullAhull3d}}
-#' @param alpha this xxx
+#' @param alpha there are three possibilities for this parameter: it can be 
+#'   a positive number, or the character string \code{"solid"} to get and set 
+#'   the smallest alpha for which the alpha hull is solid, or a positive 
+#'   integer obtained with the \code{\link{optimal}} function to get and set 
+#'   the optimal alpha for which the alpha hull has no more than a desired 
+#'   number of connected components 
 #'
 #' @return A \strong{rgl} mesh (class \code{mesh3d}) with the value of 
 #'   alpha in the \code{"alpha"} attribute.
 #' @export
+#' 
+#' @seealso \code{\link{fullAhull3d}}, \code{\link{optimal}}.
 #'
 #' @examples
 #' library(AlphaHull3D)
@@ -76,6 +88,9 @@ optimal <- function(n) {
 #' open3d(windowRect = c(50, 50, 562, 562))
 #' shade3d(mesh, color = "maroon")
 setAlpha <- function(ahull, alpha = "solid") {
+  if(!inherits(ahull, "ahull")) {
+    stop("The `ahull` argument must be an output of `fullAhull3d`.")
+  }
   if(identical(alpha, "solid")) {
     vertices <- solidAS_cpp(ahull)
   } else if(inherits(alpha, "nc")) {
