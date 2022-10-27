@@ -21,6 +21,11 @@ A \code{mesh3d} object, with an attribute \code{"volume"} if
 \description{
 Computes the alpha hull of a set of points for a given alpha.
 }
+\note{
+If you want to compute the alpha hull for several values of alpha, 
+  then instead of using this function you can use the 
+  \code{\link{fullAhull3d}} and the \code{\link{setAlpha}} functions.
+}
 \examples{
 library(AlphaHull3D)
 library(uniformly)

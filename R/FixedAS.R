@@ -10,6 +10,10 @@
 #'   \code{volume = TRUE}.
 #' @export
 #' 
+#' @note If you want to compute the alpha hull for several values of alpha, 
+#'   then instead of using this function you can use the 
+#'   \code{\link{fullAhull3d}} and the \code{\link{setAlpha}} functions.
+#' 
 #' @examples
 #' library(AlphaHull3D)
 #' library(uniformly)
@@ -26,7 +30,7 @@ ahull3d <- function(points, alpha, volume = FALSE) {
   stopifnot(is.matrix(points))
   stopifnot(ncol(points) == 3L)
   stopifnot(isNonNegativeNumber(alpha))
-  stopifnot(isBoolean(alpha))
+  stopifnot(isBoolean(volume))
   vertices <- FAS_cpp(t(points), alpha, volume)
   mesh <- makeMesh(vertices)
   if(is.null(mesh)) {
