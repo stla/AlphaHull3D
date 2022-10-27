@@ -13,3 +13,7 @@ optimalAS_cpp <- function(as_xptr, nc) {
     .Call(`_AlphaHull3D_optimalAS_cpp`, as_xptr, nc)
 }
 
+solidAS_cpp <- function(as_xptr) {
+    .Call(`_AlphaHull3D_solidAS_cpp`, as_xptr)
+}
+

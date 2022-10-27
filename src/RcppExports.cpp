@@ -48,11 +48,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// solidAS_cpp
+Rcpp::NumericMatrix solidAS_cpp(Rcpp::XPtr<Alpha_shape_3> as_xptr);
+RcppExport SEXP _AlphaHull3D_solidAS_cpp(SEXP as_xptrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<Alpha_shape_3> >::type as_xptr(as_xptrSEXP);
+    rcpp_result_gen = Rcpp::wrap(solidAS_cpp(as_xptr));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_AlphaHull3D_FAS_cpp", (DL_FUNC) &_AlphaHull3D_FAS_cpp, 3},
     {"_AlphaHull3D_AS_cpp", (DL_FUNC) &_AlphaHull3D_AS_cpp, 1},
     {"_AlphaHull3D_optimalAS_cpp", (DL_FUNC) &_AlphaHull3D_optimalAS_cpp, 2},
+    {"_AlphaHull3D_solidAS_cpp", (DL_FUNC) &_AlphaHull3D_solidAS_cpp, 1},
     {NULL, NULL, 0}
 };
 
