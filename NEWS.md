@@ -1,3 +1,8 @@
+# AlphaHull3D 2.0.0
+
+Full alpha hull.
+
+
 # AlphaHull3D 1.1.0
 
 * Enabled C++ 17.
