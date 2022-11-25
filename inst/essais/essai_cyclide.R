@@ -2,8 +2,14 @@ library(AlphaHull3D)
 library(rgl)
 library(MeshesOperations)
 
-mesh <- cyclideMesh(a = 97, c = 32, mu = 57)
-pts <- sampleOnMesh(2000, mesh)
+mesh <- cyclideMesh(a = 97, c = 12, mu = 27)
+pts <- sampleOnMesh(1000, mesh)
+
+ahull <- fullAhull3d(pts)
+mesh <- setAlpha(ahull, alpha = optimal(1))
+open3d(windowRect = c(50, 50, 512, 512), zoom = 0.85)
+shade3d(mesh, color = "orange")
+wire3d(mesh)
 
 ahull <- ahull3d(pts, alpha = 200)
 #ahull$normals <- NULL
