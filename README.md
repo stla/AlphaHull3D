@@ -12,6 +12,10 @@
 
 ![](https://raw.githubusercontent.com/stla/AlphaHull3D/main/inst/gifs/pentagrammicPrism.gif)
 
+- Pentagrammic dipyramid from its vertices:
+
+![](https://raw.githubusercontent.com/stla/AlphaHull3D/main/inst/gifs/pentagrammicDipyramid.png)
+
 - Great stellated dodecahedron from its vertices:
 
 ![](https://raw.githubusercontent.com/stla/AlphaHull3D/main/inst/gifs/greatStellatedDodecahedron.gif)
